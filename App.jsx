@@ -11,6 +11,7 @@ import Cart from './Pages/Cart/Cart';
 import Products from './Pages/Products/Products';
 import Brandes from './Pages/Brands/Brands';
 import Categories from './Pages/Categories/Categories';
+import TermsAndConditions from './Pages/TermsAndConditions/TermsAndConditions';
 
 export default function App() {
   const routes = createBrowserRouter([
@@ -22,6 +23,7 @@ export default function App() {
       {path: "products" , element:<Products/>},
       {path: "categories" , element:<Categories/>},
       {path: "brands" , element:<Brandes/>},
+      {path: "TermsAndConditions" , element:<TermsAndConditions/>},
       // {path: "contact" , element:<Contact/>},
       {path: "*" , element:<NotFounded/>}
     ]}]);
