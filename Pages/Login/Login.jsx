@@ -1,11 +1,21 @@
-import React from 'react'
+import React, { useState } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 export default function Login() {
+  const [isLoading, setIsLoading] = useState(false); 
+  const [ErrMsg, setErrMsg] = useState(null); 
+  const navigate = useNavigate(); 
   const validationSchema = Yup.object({
     email: Yup.string().required('Email is required').email('Invalid email address'),
-    password: Yup.string().required('Password is required').matches(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/, 'Password must have special characters, capital letters, small letters, numbers, and min 8 characters'),
+    password: Yup.string()
+      .required('Password is required')
+      .matches(
+        /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/,
+        'Password must have special characters, capital letters, small letters, numbers, and min 8 characters'
+      ),
   });
 
   const formik = useFormik({
@@ -14,11 +24,30 @@ export default function Login() {
       password: '',
     },
     validationSchema,
-    onSubmit: (values) => {
-      setTimeout(() => {
-        alert(JSON.stringify(values, null, 2));
-        formik.setSubmitting(false);
-      }, 3000);
+    onSubmit: async (values) => {
+      setIsLoading(true); 
+      setErrMsg(null); 
+
+      try {
+        const response = await axios.post(
+          'https://ecommerce.routemisr.com/api/v1/auth/signin',
+          values
+        );
+
+        if (response.status === 200) {
+          localStorage.setItem('token', response.data.token); 
+          navigate('/'); 
+        }
+      } catch (error) {
+        
+        if (error.response) {
+          setErrMsg(error.response.data.message); 
+        } else {
+          setErrMsg('An unexpected error occurred. Please try again.'); 
+        }
+      } finally {
+        setIsLoading(false);
+      }
     },
   });
 
@@ -31,6 +60,7 @@ export default function Login() {
               Log In
             </h1>
             <form onSubmit={formik.handleSubmit}>
+              {ErrMsg && <div className="text-red-500 text-sm mb-4">{ErrMsg}</div>}
               <div className="relative z-0 w-full mb-5 group">
                 <input
                   type="email"
@@ -75,12 +105,17 @@ export default function Login() {
                 ) : null}
               </div>
 
+              <div className="flex items-start">
+                <a href="#" className="ms-auto text-sm text-blue-700 hover:underline dark:text-blue-500">
+                  Forget Password ?
+                </a>
+              </div>
               <button
                 type="submit"
                 className="w-full my-4 text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center transition-colors duration-200 flex items-center justify-center"
-                disabled={formik.isSubmitting}
+                disabled={isLoading || !formik.isValid}
               >
-                {formik.isSubmitting ? (
+                {isLoading ? (
                   <>
                     <span className="mr-2">Loading...</span>
                     <svg
@@ -110,9 +145,9 @@ export default function Login() {
               </button>
               <label className="font-light text-gray-500 ">
                 Don't have an account?{' '}
-                <a href="/register" className="font-medium text-primary-600 hover:underline">
+                <Link to="/register" className="font-medium text-primary-600 hover:underline">
                   Register Now
-                </a>
+                </Link>
               </label>
             </form>
           </div>
@@ -121,4 +156,3 @@ export default function Login() {
     </section>
   );
 }
-

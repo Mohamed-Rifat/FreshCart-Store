@@ -1,8 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 export default function Register() {
+  const [isLoading, setIsLoading] = useState(false);
+  const [ErrMsg, setErrMsg] = useState(null);
+  const navigate = useNavigate(); 
   const validationSchema = Yup.object({
     name: Yup.string().required('Name is required').min(3, 'Name must be at least 3 characters'),
     email: Yup.string().required('Email is required').email('Invalid email address'),
@@ -12,7 +17,7 @@ export default function Register() {
         /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/,
         'Password must have special characters, capital letters, small letters, numbers, and min 8 characters'
       ),
-    confirmPassword: Yup.string()
+    rePassword: Yup.string()
       .required('Confirm password is required')
       .oneOf([Yup.ref('password'), null], 'Passwords must match'),
     phone: Yup.string()
@@ -28,16 +33,34 @@ export default function Register() {
       name: '',
       email: '',
       password: '',
-      confirmPassword: '',
+      rePassword: '',
       phone: '',
       terms: false,
     },
     validationSchema,
-      onSubmit: (values) => {
-      setTimeout(() => {
-        alert(JSON.stringify(values, null, 2));
-        formik.setSubmitting(false);
-      }, 3000);
+    onSubmit: async (values) => {
+      setIsLoading(true);
+      setErrMsg(null);
+      try {
+        const response = await axios.post(
+          'https://ecommerce.routemisr.com/api/v1/auth/signup',
+          values
+        );
+
+        if (response.status === 201) {
+          alert('Registration successful!');
+          navigate('/login');
+        }
+      } catch (error) {
+
+        if (error.response) {
+          setErrMsg(error.response.data.message);
+        } else {
+          setErrMsg('An unexpected error occurred. Please try again.');
+        }
+      } finally {
+        setIsLoading(false);
+      }
     },
   });
 
@@ -50,6 +73,7 @@ export default function Register() {
               Registration Now
             </h1>
             <form onSubmit={formik.handleSubmit}>
+              {ErrMsg && <div className="text-red-500 text-sm mb-4">{ErrMsg}</div>}
               <div className="relative z-0 w-full mb-5 group">
                 <input
                   type="text"
@@ -71,7 +95,6 @@ export default function Register() {
                   <div className="text-red-500 text-sm">{formik.errors.name}</div>
                 ) : null}
               </div>
-
               <div className="relative z-0 w-full mb-5 group">
                 <input
                   type="email"
@@ -93,7 +116,6 @@ export default function Register() {
                   <div className="text-red-500 text-sm">{formik.errors.email}</div>
                 ) : null}
               </div>
-
               <div className="relative z-0 w-full mb-5 group">
                 <input
                   type="password"
@@ -115,26 +137,25 @@ export default function Register() {
                   <div className="text-red-500 text-sm">{formik.errors.password}</div>
                 ) : null}
               </div>
-
               <div className="relative z-0 w-full mb-5 group">
                 <input
                   type="password"
-                  name="confirmPassword"
-                  id="confirmPassword"
+                  name="rePassword"
+                  id="rePassword"
                   className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                   placeholder=" "
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
-                  value={formik.values.confirmPassword}
+                  value={formik.values.rePassword}
                 />
                 <label
-                  htmlFor="confirmPassword"
+                  htmlFor="rePassword"
                   className="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
                 >
                   Confirm password
                 </label>
-                {formik.touched.confirmPassword && formik.errors.confirmPassword ? (
-                  <div className="text-red-500 text-sm">{formik.errors.confirmPassword}</div>
+                {formik.touched.rePassword && formik.errors.rePassword ? (
+                  <div className="text-red-500 text-sm">{formik.errors.rePassword}</div>
                 ) : null}
               </div>
               <div className="relative z-0 w-full mb-5 group">
@@ -158,7 +179,6 @@ export default function Register() {
                   <div className="text-red-500 text-sm">{formik.errors.phone}</div>
                 ) : null}
               </div>
-
               <div className="flex items-start">
                 <div className="flex items-center h-5">
                   <input
@@ -183,13 +203,11 @@ export default function Register() {
                   ) : null}
                 </div>
               </div>
-
               <button
                 type="submit"
                 className="w-full my-4 text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center transition-colors duration-200 flex items-center justify-center"
-                disabled={formik.isSubmitting}
-              >
-                {formik.isSubmitting ? (
+                disabled={isLoading || !formik.isValid}>
+                {isLoading ? (
                   <>
                     <span className="mr-2">Loading...</span>
                     <svg
@@ -219,9 +237,9 @@ export default function Register() {
               </button>
               <label className="font-light text-gray-500 ">
                 Already have an account?{' '}
-                <a href="/login" className="font-medium text-primary-600 hover:underline">
+                <Link to="/login" className="font-medium text-primary-600 hover:underline">
                   Login here
-                </a>
+                </Link>
               </label>
             </form>
           </div>
