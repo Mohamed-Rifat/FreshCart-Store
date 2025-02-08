@@ -48,7 +48,7 @@ export default function Footer() {
             </div>
           </div>
           <div className="flex items-center justify-center text-lg border-t border-gray-300 pt-4">
-          <p>Copyright © {currentYear} By <span className='text-xl from-[#8A2BE2] to-[#DA80D6] bg-gradient-to-r from-[#A4DE02] to-[#7FFF00] bg-clip-text text-transparent'>Mohamed Refaat</span></p>
+          <p>Copyright © {currentYear} By <span className='text-xl bg-gradient-to-r from-[#00C9FF] to-[#0ed122] bg-clip-text text-transparent'>Mohamed Refaat</span></p>
         </div>
         </div>
       </div>
