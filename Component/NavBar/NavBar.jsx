@@ -52,7 +52,7 @@ export default function Navbar() {
                 <li>
                   <NavLink
                     to="/"
-                    className="block py-2 px-3 text-black hover:bg-[#0AAD0A] rounded xl:hover:bg-transparent xl:hover:text-[#0AAD0A] xl:p-0"
+                    className="block py-2 px-3 text-black hover:bg-[#0AAD0A] xl:hover:bg-transparent xl:hover:text-[#0AAD0A] xl:p-0 border-b-2 border-b-transparent hover:border-b-[#0AAD0A] transition-all duration-300"
                     aria-current="page"
                     onClick={closeMenu}
                   >
@@ -62,7 +62,7 @@ export default function Navbar() {
                 <li>
                   <NavLink
                     to="/cart"
-                    className="block py-2 px-3 text-black hover:bg-[#0AAD0A] rounded xl:hover:bg-transparent xl:border-0 xl:hover:text-[#0AAD0A] xl:p-0"
+                    className="block py-2 px-3 text-black hover:bg-[#0AAD0A] xl:hover:bg-transparent xl:hover:text-[#0AAD0A] xl:p-0 border-b-2 border-b-transparent hover:border-b-[#0AAD0A] transition-all duration-300"
                     onClick={closeMenu}
                   >
                     Cart
@@ -71,7 +71,7 @@ export default function Navbar() {
                 <li>
                   <NavLink
                     to="/products"
-                    className="block py-2 px-3 text-black hover:bg-[#0AAD0A] rounded xl:hover:bg-transparent xl:border-0 xl:hover:text-[#0AAD0A] xl:p-0"
+                    className="block py-2 px-3 text-black hover:bg-[#0AAD0A] xl:hover:bg-transparent xl:hover:text-[#0AAD0A] xl:p-0 border-b-2 border-b-transparent hover:border-b-[#0AAD0A] transition-all duration-300"
                     onClick={closeMenu}
                   >
                     Products
@@ -80,7 +80,7 @@ export default function Navbar() {
                 <li>
                   <NavLink
                     to="/categories"
-                    className="block py-2 px-3 text-black hover:bg-[#0AAD0A] rounded xl:hover:bg-transparent xl:border-0 xl:hover:text-[#0AAD0A] xl:p-0"
+                    className="block py-2 px-3 text-black hover:bg-[#0AAD0A] xl:hover:bg-transparent xl:hover:text-[#0AAD0A] xl:p-0 border-b-2 border-b-transparent hover:border-b-[#0AAD0A] transition-all duration-300"
                     onClick={closeMenu}
                   >
                     Categories
@@ -89,7 +89,7 @@ export default function Navbar() {
                 <li>
                   <NavLink
                     to="/brands"
-                    className="block py-2 px-3 text-black hover:bg-[#0AAD0A] rounded xl:hover:bg-transparent xl:border-0 xl:hover:text-[#0AAD0A] xl:p-0"
+                    className="block py-2 px-3 text-black hover:bg-[#0AAD0A] xl:hover:bg-transparent xl:hover:text-[#0AAD0A] xl:p-0 border-b-2 border-b-transparent hover:border-b-[#0AAD0A] transition-all duration-300"
                     onClick={closeMenu}
                   >
                     Brands
@@ -103,7 +103,7 @@ export default function Navbar() {
                 <li className="xl:hidden">
                   <NavLink
                     to="/login"
-                    className="block py-2 px-3 text-black hover:bg-[#0AAD0A] rounded xl:hover:bg-transparent xl:border-0 xl:hover:text-[#0AAD0A] xl:p-0"
+                    className="block py-2 px-3 text-black hover:bg-[#0AAD0A] xl:hover:bg-transparent xl:hover:text-[#0AAD0A] xl:p-0 border-b-2 border-b-transparent hover:border-b-[#0AAD0A] transition-all duration-300"
                     onClick={closeMenu}
                   >
                     Login
@@ -112,7 +112,7 @@ export default function Navbar() {
                 <li className="xl:hidden">
                   <NavLink
                     to="/register"
-                    className="block py-2 px-3 text-black hover:bg-[#0AAD0A] rounded xl:hover:bg-transparent xl:border-0 xl:hover:text-[#0AAD0A] xl:p-0"
+                    className="block py-2 px-3 text-black hover:bg-[#0AAD0A] xl:hover:bg-transparent xl:hover:text-[#0AAD0A] xl:p-0 border-b-2 border-b-transparent hover:border-b-[#0AAD0A] transition-all duration-300"
                     onClick={closeMenu}
                   >
                     Register
@@ -149,7 +149,7 @@ export default function Navbar() {
             {token && (
               <button
                 onClick={handleLogout}
-                className="text-black hover:text-[#971400]"
+                className="text-black hover:text-[#971400] border-b-2 border-b-transparent hover:border-b-[#971400] transition-all duration-300"
               >
                 Sign Out
               </button>
@@ -159,13 +159,13 @@ export default function Navbar() {
               <>
                 <Link
                   to="/login"
-                  className="text-black hover:text-[#0AAD0A]"
+                  className="text-black hover:text-[#0AAD0A] border-b-2 border-b-transparent hover:border-b-[#0AAD0A] transition-all duration-300"
                 >
                   Login
                 </Link>
                 <Link
                   to="/register"
-                  className="text-black hover:text-[#0AAD0A]"
+                  className="text-black hover:text-[#0AAD0A] border-b-2 border-b-transparent hover:border-b-[#0AAD0A] transition-all duration-300"
                 >
                   Register
                 </Link>

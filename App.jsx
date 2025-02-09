@@ -15,6 +15,7 @@ import TermsAndConditions from './Pages/TermsAndConditions/TermsAndConditions';
 import ForgotPassword from './Pages/ForgotPassword/ForgotPassword';
 import VerifyResetCode from './Pages/VerifyResetCode/VerifyResetCode';
 import ResetPassword from './Pages/ResetPassword/ResetPassword';
+import ProductsHome from './Pages/ProductsHome/ProductsHome';
 
 export default function App() {
   const routes = createBrowserRouter([
@@ -30,6 +31,7 @@ export default function App() {
       {path: "forgot-password" , element:<ForgotPassword/>},
       {path: "verify-reset-code" , element:<VerifyResetCode/>},
       {path: "reset-password" , element:<ResetPassword/>},
+      {path: "ProductsHome" , element:<ProductsHome/>},
       // {path: "contact" , element:<Contact/>},
       {path: "*" , element:<NotFounded/>}
     ]}]);

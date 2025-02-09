@@ -12,7 +12,7 @@ const Home = () => {
         return (
             <>
                 <Helmet>
-                    <title>Fresh Cart - Welcome Back</title>
+                    <title>Fresh Cart</title>
                 </Helmet>
                 <div className="flex justify-center items-center h-[60vh] text-white text-center p-5 bg-cover bg-center">
                     <div className="max-w-2xl">
@@ -23,7 +23,7 @@ const Home = () => {
                             Enjoy your shopping experience with exclusive offers!
                         </p>
                         <button
-                            onClick={() => navigate('/products')}
+                            onClick={() => navigate('/ProductsHome')}
                             className="bg-gradient-to-r from-[#00C9FF] to-[#0ed122] text-white border-none py-4 px-8 text-lg rounded-full cursor-pointer transition-all duration-700 ease-in-out hover:scale-105 hover:shadow-lg hover:bg-gradient-to-r hover:from-[#0ed122] hover:to-[#00C9FF] animate-pulse-slow">
                             Continue Shopping
                         </button>
