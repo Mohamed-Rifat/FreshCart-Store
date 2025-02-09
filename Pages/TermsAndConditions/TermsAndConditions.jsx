@@ -1,8 +1,8 @@
 import React from 'react';
-
+import './TermsAndConditions.css';
 export default function TermsAndConditions() {
   return (
-    <section className="p-6">
+    <section className="p-6 terms-container">
       <div className="max-w-5xl mx-auto">
         <h1 className="text-5xl font-bold mb-6 text-center">Terms and Conditions</h1>
         <div className="space-y-4 text-gray-700">

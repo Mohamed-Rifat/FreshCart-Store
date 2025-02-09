@@ -12,6 +12,9 @@ import Products from './Pages/Products/Products';
 import Brandes from './Pages/Brands/Brands';
 import Categories from './Pages/Categories/Categories';
 import TermsAndConditions from './Pages/TermsAndConditions/TermsAndConditions';
+import ForgotPassword from './Pages/ForgotPassword/ForgotPassword';
+import VerifyResetCode from './Pages/VerifyResetCode/VerifyResetCode';
+import ResetPassword from './Pages/ResetPassword/ResetPassword';
 
 export default function App() {
   const routes = createBrowserRouter([
@@ -24,6 +27,9 @@ export default function App() {
       {path: "categories" , element:<Categories/>},
       {path: "brands" , element:<Brandes/>},
       {path: "TermsAndConditions" , element:<TermsAndConditions/>},
+      {path: "forgot-password" , element:<ForgotPassword/>},
+      {path: "verify-reset-code" , element:<VerifyResetCode/>},
+      {path: "reset-password" , element:<ResetPassword/>},
       // {path: "contact" , element:<Contact/>},
       {path: "*" , element:<NotFounded/>}
     ]}]);
