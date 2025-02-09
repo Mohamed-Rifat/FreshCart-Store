@@ -4,6 +4,7 @@ import * as Yup from 'yup';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './Login.css';
+import { Helmet } from 'react-helmet';
 
 export default function Login() {
   const [isLoading, setIsLoading] = useState(false);
@@ -53,6 +54,10 @@ export default function Login() {
   });
 
   return (
+   <>
+   <Helmet>
+    <title>Login</title>
+   </Helmet>
     <section>
       <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto my-20 lg:py-0">
         <div className="w-full bg-slate-400 bg-opacity-20 p-6 rounded-lg shadow-lg md:mt-0 sm:max-w-xl xl:p-0">
@@ -169,5 +174,6 @@ export default function Login() {
         </div>
       </div>
     </section>
+   </>
   );
 }

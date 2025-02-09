@@ -1,7 +1,12 @@
 import React from 'react';
 import './TermsAndConditions.css';
+import { Helmet } from 'react-helmet';
 export default function TermsAndConditions() {
   return (
+  <>
+  <Helmet>
+    <title>Terms And Conditions</title>
+  </Helmet>
     <section className="p-6 terms-container">
       <div className="max-w-5xl mx-auto">
         <h1 className="text-5xl font-bold mb-6 text-center">Terms and Conditions</h1>
@@ -79,5 +84,6 @@ export default function TermsAndConditions() {
         </div>
       </div>
     </section>
+  </>
   );
 }
